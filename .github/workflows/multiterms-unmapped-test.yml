@@ -13,7 +13,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
-      - name: Run MultiTermsAggregatorTests
-        run: ./gradlew :x-pack:plugin:analytics:test --tests "org.elasticsearch.xpack.analytics.multiterms.MultiTermsAggregatorTests" --console=plain
-      - name: Run MultiTermsMissingFieldIT
-        run: ./gradlew :x-pack:plugin:analytics:internalClusterTest --tests "org.elasticsearch.xpack.analytics.multiterms.MultiTermsMissingFieldIT" --console=plain
+      - name: Spotless check
+        run: ./gradlew :x-pack:plugin:analytics:spotlessCheck --console=plain
+      - name: Run analytics unit tests
+        run: ./gradlew :x-pack:plugin:analytics:test --console=plain
+      - name: Run multiterms integration tests
+        run: ./gradlew :x-pack:plugin:analytics:internalClusterTest --tests "org.elasticsearch.xpack.analytics.multiterms.*" --console=plain
