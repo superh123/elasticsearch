@@ -1,0 +1,19 @@
+name: multiterms-unmapped-test
+
+on:
+  push:
+    branches: [test/multiterms-unmapped-field]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Run MultiTermsAggregatorTests
+        run: ./gradlew :x-pack:plugin:analytics:test --tests "org.elasticsearch.xpack.analytics.multiterms.MultiTermsAggregatorTests" --console=plain
+      - name: Run MultiTermsMissingFieldIT
+        run: ./gradlew :x-pack:plugin:analytics:internalClusterTest --tests "org.elasticsearch.xpack.analytics.multiterms.MultiTermsMissingFieldIT" --console=plain
