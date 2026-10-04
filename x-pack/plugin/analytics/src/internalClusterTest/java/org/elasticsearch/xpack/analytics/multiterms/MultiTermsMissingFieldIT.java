@@ -36,7 +36,7 @@ public class MultiTermsMissingFieldIT extends ESIntegTestCase {
         indicesAdmin().prepareCreate("integer").setMapping("value", "type=integer", "value2", "type=integer").get();
         indicesAdmin().prepareCreate("long").setMapping("value", "type=long", "value2", "type=long").get();
         indicesAdmin().prepareCreate("nothing").get();
-        indicesAdmin().prepareAliases()
+        indicesAdmin().prepareAliases(TEST_REQUEST_TIMEOUT, TEST_REQUEST_TIMEOUT)
             .addAlias("integer", "allThree")
             .addAlias("integer", "intAndLong")
             .addAlias("long", "allThree")
