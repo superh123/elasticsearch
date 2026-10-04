@@ -1,0 +1,17 @@
+name: ip-object-value-test
+
+on:
+  push:
+    branches: [test/ip-object-ignore-malformed]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Run IpFieldMapperObjectValueTests
+        run: ./gradlew :server:test --tests "org.elasticsearch.index.mapper.IpFieldMapperObjectValueTests" --console=plain
